@@ -1,0 +1,26 @@
+# macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Icon files
+Icon?
+.icon?
+
+# Specific folders
+.DS_Store?
+.DS_Store/*
+*/.DS_Store
+*/.DS_Store/*
+**/.DS_Store
+**/.DS_Store/*
+
+# macOS resource forks
+._*
+
+# macOS specific folders
+.Spotlight-V100
+.Trashes
