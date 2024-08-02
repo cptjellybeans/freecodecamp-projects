@@ -1,0 +1,24 @@
+<script>
+  function result(word,palindrome) {
+    const resultString = `${word} ${(palindrome)?"is":"is not"} a palindrome`;
+    console.log(resultString);
+    document.getElementById('result').innerHTML = resultString;
+  }
+  function checkPalindrome () {
+    const text = document.getElementById('text-input').value; // get input value
+    const cleanedText = text.replace(/[^0-9a-z]/gi, '').toLowerCase(); // clean it up
+    // Requirement 4
+    if (cleanedText=="") {
+      alert("Please input a value");
+    }
+    // Detect palindrome
+    const oddBit = cleanedText.length%2;
+    const part1 = cleanedText.substr(0,(cleanedText.length-oddBit)/2)
+    const part2 = cleanedText.substr((cleanedText.length+oddBit)/2,(cleanedText.length-oddBit)/2).split("").reverse().join("");
+    console.log(`checking ${text} > ${cleanedText} > palindrome: ${part1==part2}`)
+    return result(text,part1==part2)
+  }
+  </script>
+  <input id="text-input" label="Is it a palindrome?" />
+  <button id="check-btn" onclick="checkPalindrome()">Check</button>
+  <div id="result"></div>

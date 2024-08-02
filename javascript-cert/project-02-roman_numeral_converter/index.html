@@ -1,0 +1,58 @@
+<script>
+let output = (str) => {
+  // Set output string
+  document.getElementById('output').innerHTML = str;
+  return str;
+}
+let convertToRomanNumeral = (inputNumber) => {
+  const number = Math.round(inputNumber);
+  //console.log(`Converting ${number}`)
+  // Req 4
+  if (number=="") {
+    return output("Please enter a valid number")
+  }
+  // Req 5
+  if (number<1) {
+    return output("Please enter a number greater than or equal to 1")
+  }
+  // Req 6
+  if (number>=4000) {
+    return output("Please enter a number less than or equal to 3999")
+  }
+  // Convert
+  // I, V, X, L, C, D, M
+  const romanPositionMap = [
+    ["I","V"],
+    ["X","L"],
+    ["C","D"],
+    ["M"]
+  ]
+  // For each, round down at 1/2 rounding up at 4/5
+  let outputArray = [];
+  for (const [posIndex,digitString] of number.toString().split("").reverse().entries()) {
+    const digit = Number(digitString)
+    //console.log(digit,posIndex)
+    if (posIndex<=2) {
+      const one = romanPositionMap[posIndex][0];
+      const five = romanPositionMap[posIndex][1];
+      const ten = romanPositionMap[posIndex+1][0];
+      if (digit<=3) {
+        outputArray.push(one.repeat(digit));
+      } else if (digit<=5) {
+        outputArray.push(one.repeat(5-digit)+five);
+      } else if (digit<=8) {      
+        outputArray.push(five+one.repeat(digit-5));
+      } else {
+        outputArray.push(one+ten);
+      }
+    } else {
+      outputArray.push(romanPositionMap[posIndex][0].repeat(digit))
+    }
+  }
+  //console.log(outputArray.reverse().join(""));
+  return output(outputArray.reverse().join(""));
+}
+</script>
+<input id="number" type="number" />
+<button id="convert-btn" onclick="convertToRomanNumeral(document.getElementById('number').value);">Convert!</button>
+<p id="output"></p>

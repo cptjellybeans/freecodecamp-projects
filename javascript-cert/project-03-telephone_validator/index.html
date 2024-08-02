@@ -1,0 +1,27 @@
+<script>
+  function output (str) {
+    document.getElementById("results-div").innerHTML = str;
+    return str;
+  }
+  function clearResults () {
+    document.getElementById("results-div").innerHTML = "";
+  }
+  function check () {
+    const input = document.getElementById("user-input").value.trim();
+    // Req 5
+    if (input=="") {
+      alert("Please provide a phone number");
+    }
+    // check if parentheses are used
+    const parenthesesUsed = input.match(/[()]/g);
+    const parenthesesRegex = /^[1]?[ ]?[(]{1}[0-9]{3}[)]{1}[ ]?[0-9]{3}[ -]?[0-9]{4}$/g;
+    const noParenthesesRegex = /^[1]?[ ]?[0-9]{3}[- ]?[0-9]{3}[ -]?[0-9]{4}$/g
+    const match = input.match((parenthesesUsed)?parenthesesRegex:noParenthesesRegex);
+    console.log(`${input} > ${match} (${(parenthesesUsed)?"Parentheses Used":"No Parentheses"})`);
+    return output(`${(match)?"Valid":"Invalid"} US number: ${input}`)
+  }
+  </script>
+  <input id="user-input" />
+  <button id="check-btn" onclick="check()">Check Number</button>
+  <button id="clear-btn" onclick="clearResults()">Clear</button>
+  <p id="results-div"></p>  
